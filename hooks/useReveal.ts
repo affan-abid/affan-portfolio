@@ -6,9 +6,10 @@ export function useReveal() {
   useEffect(() => {
     const el = ref.current
     if (!el) return
-    const targets = el.classList.contains('reveal')
-      ? [el, ...el.querySelectorAll('.reveal')]
-      : el.querySelectorAll('.reveal')
+
+    const targets: Element[] = el.classList.contains('reveal')
+      ? [el, ...Array.from(el.querySelectorAll('.reveal'))]
+      : Array.from(el.querySelectorAll('.reveal'))
 
     const observer = new IntersectionObserver(
       (entries) => {
